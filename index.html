@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+  <head>
+    <meta charset="utf-8">
+    <title>wietecha-mrzyglod</title>
+    <style>
+
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{text}}</h1>
+      <ul>
+        <li v-for="(product, index) in products">{{ product }}<button @click="removeProduct(index)">Remove</button></li>
+      </ul>
+      <input type="text" v-model="newProduct" />
+      <!-- v-model="newProduct.name" -->
+      <button @click="addProduct()">Add next product</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      var app = new Vue({
+        el: '#app',
+        data: {
+          text: "Products list:",
+          products: ["one", "two", "three"],
+          newProduct: ""
+        },
+        methods: {
+          addProduct(){
+            this.products.push(this.newProduct)
+            console.log("product added");
+            this.newProduct = ""
+          },
+          removeProduct(index){
+            this.products.splice(index, 1);
+            // console.log(this.products[index])
+            console.log("product removed");
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
