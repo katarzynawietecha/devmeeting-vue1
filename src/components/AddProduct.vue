@@ -1,7 +1,6 @@
 <template>
   <form @submit.prevent="onSubmit()">
     <input name="newProduct" v-model="newProduct.name" v-validate="'required|min:4'"/>
-    <!-- <button @click="addProduct()">Add next product</button> -->
     <button>Add next product</button>
     <div v-show="errors.has('newProduct')">
       {{ errors.first('newProduct') }}

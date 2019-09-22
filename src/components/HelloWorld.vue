@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{text}}</h1>
-    <product-list :products="sharedState.products" />
+    <product-list :products="products" />
     <add-product @add-product="onAddProduct" />
   </div>
 </template>
@@ -13,19 +13,24 @@ import store from '@/store'
 
 export default {
   name: 'HelloWorld',
-  async created(){
-    store.fetchProducts()
-  },
   data(){
     return {
       text: "Products list:",
-      sharedState: store.state
+    }
+  },
+  computed: {
+    products(){
+      return this.$store.state.products;
     }
   },
   methods: {
     onAddProduct(product){
-      this.products.push(product);
+      // this.sharedState.products.push(product);
+      this.$store.dispatch('addProduct', product)
     }
+  },
+  created(){
+    this.$store.dispatch('fetchProducts')
   },
   components: {
     ProductList,
